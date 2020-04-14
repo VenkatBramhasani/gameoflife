@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Universe.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gameoflife-core</a> &gt; <a href="index.source.html" class="el_package">com.wakaleo.gameoflife.domain</a> &gt; <span class="el_source">Universe.java</span></div><h1>Universe.java</h1><pre class="source lang-java linenums">package com.wakaleo.gameoflife.domain;
+
+import static com.wakaleo.gameoflife.domain.Cell.LIVE_CELL;
+import static com.wakaleo.gameoflife.domain.Cell.DEAD_CELL;
+
+ /**
+ * Wakaleo Consulting - John Ferguson Smart
+ * Game of life, demonstration application for Jenkins: The Definitive Guide
+ *
+ * Universe.java
+ * A universe is a succession of grids over time.
+ * Each new grid is generated from the previous one using the rules of the Game Of Life.
+ */
+public class Universe {
+
+<span class="fc" id="L16">    private static final String NEW_LINE = System.getProperty(&quot;line.separator&quot;);</span>
+
+    private Grid currentGridContent;
+
+	// Default constructor, called on &quot;NEW GAME&quot; button click
+<span class="fc" id="L21">    public Universe() {</span>
+<span class="fc" id="L22">        currentGridContent = new Grid();</span>
+<span class="fc" id="L23">    }</span>
+	// Create blank grid of given size, called on &quot;Go&quot; button click 
+<span class="fc" id="L25">    public Universe(final int rows, final int columns) {</span>
+<span class="fc" id="L26">        currentGridContent = new Grid(rows, columns);</span>
+<span class="fc" id="L27">    }</span>
+	// Create grid given cell layout, called on &quot;Next Generation&quot; button click 
+<span class="fc" id="L29">    public Universe(final String initialGridContents) {</span>
+<span class="fc" id="L30">        currentGridContent = new Grid(initialGridContents);</span>
+<span class="fc" id="L31">    }</span>
+
+	// Returns the input string, functions as the Universe class' print
+    public static String seededWith(final String gridContents) {
+<span class="fc" id="L35">        return gridContents;</span>
+    }
+
+	// Calculates the game-of-life's next iteration, called on &quot;Next Generation&quot; button click
+    public void spawnsANewGeneration() {
+<span class="fc" id="L40">        createNextGeneration();</span>
+<span class="fc" id="L41">    }</span>
+    public void createNextGeneration() {
+<span class="fc" id="L43">        StringBuffer nextGenerationContent = new StringBuffer();</span>
+<span class="fc" id="L44">        int maxRow = currentGridContent.getWidth();</span>
+<span class="fc" id="L45">        int maxColumn = currentGridContent.getHeight();</span>
+
+		// Iterates over entire grid
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        for (int y = 0; y &lt; maxRow; y++) { // From top to bottom</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">            for (int x = 0; x &lt; maxColumn; x++) { // From left to right</span>
+<span class="fc" id="L50">                Cell currentCell = currentGridContent.getCellAt(x, y);</span>
+<span class="fc" id="L51">                int neighbourCount = currentGridContent.getLiveNeighboursAt(x, y); // getLiveNeighboursAt() defined in Grid.java</span>
+<span class="fc" id="L52">                Cell nextCell = null;</span>
+
+				// Based on the rules of game-of-life, calculate next state
+<span class="fc bfc" id="L55" title="All 2 branches covered.">                if (currentCell == Cell.LIVE_CELL) { // If cell is currently LIVE</span>
+<span class="fc bfc" id="L56" title="All 4 branches covered.">                    if ((neighbourCount == 2) || (neighbourCount == 3)) {</span>
+<span class="fc" id="L57">                        nextCell = LIVE_CELL; // Stay LIVE if 2 or 3 neighbours are LIVE</span>
+                    } else {
+<span class="fc" id="L59">                        nextCell = DEAD_CELL; // Else, become DEAD due to underpopulation or overcrowding</span>
+                    }
+                } else { // If cell is currently DEAD
+<span class="fc bfc" id="L62" title="All 2 branches covered.">                    if (neighbourCount == 3) {</span>
+<span class="fc" id="L63">                        nextCell = LIVE_CELL; // Become LIVE if 3 neighbours are LIVE</span>
+                    } else {
+<span class="fc" id="L65">                        nextCell = DEAD_CELL; // Else, stay DEAD</span>
+                    }
+                }
+<span class="fc" id="L68">                nextGenerationContent.append(nextCell);</span>
+            }
+<span class="fc" id="L70">            nextGenerationContent.append(NEW_LINE);</span>
+        }
+<span class="fc" id="L72">        nextGenerationContent.append(NEW_LINE);</span>
+
+		// Sets the finalized grid of the game-of-life's next step
+<span class="fc" id="L75">        currentGridContent = new Grid(nextGenerationContent.toString());</span>
+<span class="fc" id="L76">    }</span>
+
+	// Return the status of every cell as a string
+    public String getGrid() {
+<span class="fc" id="L80">        return currentGridContent.toString();</span>
+    }
+	// Return the cell objects in the grid as a 2D array
+    public Cell[][] getCells() {
+<span class="fc" id="L84">        return currentGridContent.getContents();</span>
+    }
+
+	// Set cell at given coordinate to LIVE
+    public void setLiveCellAt(final int row, final int column) {
+<span class="fc" id="L89">        this.currentGridContent.setCellAt(column, row, LIVE_CELL);</span>
+<span class="fc" id="L90">    }</span>
+	// Set cell at given coordinate to DEAD
+    public void setDeadCellAt(final int row, final int column) {
+<span class="fc" id="L93">        this.currentGridContent.setCellAt(column, row, DEAD_CELL);</span>
+<span class="fc" id="L94">    }</span>
+
+	// Return the cell object at the given coordinate
+    public Cell getCellAt(final int row, final int column) {
+<span class="fc" id="L98">        return currentGridContent.getCellAt(column, row);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

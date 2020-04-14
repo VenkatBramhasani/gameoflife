@@ -1,0 +1,10 @@
+D:\HCL-POC\gameoflife-master\gameoflife-core\src\test\java\com\wakaleo\gameoflife\test\categories\RegressionTests.java
+D:\HCL-POC\gameoflife-master\gameoflife-core\src\test\java\com\wakaleo\gameoflife\integration\WhenYouStoreGamesInADatabase.java
+D:\HCL-POC\gameoflife-master\gameoflife-core\src\test\java\com\wakaleo\gameoflife\domain\WhenYouCreateAGrid.java
+D:\HCL-POC\gameoflife-master\gameoflife-core\src\test\java\com\wakaleo\gameoflife\domain\WhenYouReadAGridFromAString.java
+D:\HCL-POC\gameoflife-master\gameoflife-core\src\test\java\com\wakaleo\gameoflife\domain\WhenYouCreateANewUniverse.java
+D:\HCL-POC\gameoflife-master\gameoflife-core\src\test\java\com\wakaleo\gameoflife\domain\WhenYouPlayTheGameOfLife.java
+D:\HCL-POC\gameoflife-master\gameoflife-core\src\test\java\com\wakaleo\gameoflife\test\categories\SlowTests.java
+D:\HCL-POC\gameoflife-master\gameoflife-core\src\test\java\com\wakaleo\gameoflife\domain\WhenYouCreateACell.java
+D:\HCL-POC\gameoflife-master\gameoflife-core\src\test\java\com\wakaleo\gameoflife\domain\WhenYouPrintAGrid.java
+D:\HCL-POC\gameoflife-master\gameoflife-core\src\test\java\com\wakaleo\gameoflife\test\categories\IntegrationTests.java

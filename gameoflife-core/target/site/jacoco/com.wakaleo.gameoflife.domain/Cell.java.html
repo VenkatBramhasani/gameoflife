@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Cell.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gameoflife-core</a> &gt; <a href="index.source.html" class="el_package">com.wakaleo.gameoflife.domain</a> &gt; <span class="el_source">Cell.java</span></div><h1>Cell.java</h1><pre class="source lang-java linenums">package com.wakaleo.gameoflife.domain;
+
+ /**
+ * Wakaleo Consulting - John Ferguson Smart
+ * Game of life, demonstration application for Jenkins: The Definitive Guide
+ *
+ * Cell.java
+ * Cell object class, contains information on individual cells (positions) in the grid
+ */
+<span class="fc" id="L10">public enum Cell {</span>
+	// Symbols to represent cell status
+<span class="fc" id="L12">    LIVE_CELL(&quot;*&quot;), DEAD_CELL(&quot;.&quot;);</span>
+
+    private String symbol;
+
+<span class="fc" id="L16">    private Cell(final String initialSymbol) {</span>
+<span class="fc" id="L17">        this.symbol = initialSymbol;</span>
+<span class="fc" id="L18">    }</span>
+
+	// Override function for easy printing of cell's symbol
+	// Functions identically to default getter ( getSymbol() )
+    @Override
+    public String toString() {
+<span class="fc" id="L24">        return symbol;</span>
+    }
+
+	// Function used for creating a cell given a string
+    static Cell fromSymbol(final String symbol) {
+<span class="fc" id="L29">        Cell cellRepresentedBySymbol = null;</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        for (Cell cell : Cell.values()) {</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">            if (cell.symbol.equals(symbol)) {</span>
+<span class="fc" id="L32">                cellRepresentedBySymbol = cell;</span>
+<span class="fc" id="L33">                break;</span>
+            }
+        }
+<span class="fc" id="L36">        return cellRepresentedBySymbol;</span>
+    }
+
+	// Default getter
+    public String getSymbol() {
+<span class="fc" id="L41">        return symbol;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
